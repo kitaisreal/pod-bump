@@ -15,13 +15,11 @@ OptionParser.new do |opt|
         pod-bump set (1.2.3) [options]  # set the version number to the given value
   Options:
   BANNER
-  opt.on("-s", "--specs_repository [REPO]", "Specs repository to push. Default 'trunk'.") { |o| options[:spec_repository] = o }
-  opt.on("-m", "--message [MSG]", "Commit message. Default 'Bumped Version [Vesion]' ") { |o| options[:commit_message] = o }
-  opt.on("--no-commit", "Do not commit after version bump.") { options[:no_commit] = true }
+  opt.on("-s", "--specs_repository [REPO_URL]", "Specs repository to push. Default 'trunk'.") { |o| options[:spec_repository] = o }
+  opt.on("-m", "--commit-message [MSG]", "Commit message. Default 'Bumped Version [Vesion]' ") { |o| options[:commit_message] = o }
+  opt.on("--no-commit", "Do not commit after version bump") { options[:no_commit] = true }
+  opt.on("--version", "Print current version") { options[:print_version] = true }
 end.parse!
 
 options[:version] = ARGV[1] if ARGV[0] == "set"
-
 status = PodBump.run(ARGV, options)
-# puts "Exit status " + status
-# exit status

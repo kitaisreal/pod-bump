@@ -1,4 +1,5 @@
 require 'pod-bump/version'
+require 'pod-bump/version_model'
 require 'pod-bump/version_update_type'
 require 'git'
 require 'digest/sha1'
@@ -136,7 +137,7 @@ module PodBump
   end
 
   def PodBump.get_version_string_to_update(bump_type, options, version_string)
-    version = Version.new(version_string)
+    version = VersionModel.new(version_string)
     version_to_update = nil
 
     if bump_type == VersionUpdateType::MAJOR
@@ -158,6 +159,11 @@ module PodBump
   end
 
   def PodBump.run(arguments, options)
+    if options[:print_version] == true
+      puts "pod-bump version " + PodBump::VERSION
+      return
+    end
+
     if arguments.size > 2 || (arguments.size == 2 && options[:version] == nil)
       puts "Invalid parameters. Please check documentation"
       return
