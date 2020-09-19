@@ -18,6 +18,7 @@ OptionParser.new do |opt|
   opt.on("-s", "--specs_repository [REPO_URL]", "Specs repository to push. Default 'trunk'.") { |o| options[:spec_repository] = o }
   opt.on("-m", "--commit-message [MSG]", "Commit message. Default 'Bumped Version [Vesion]' ") { |o| options[:commit_message] = o }
   opt.on("--no-commit", "Do not commit after version bump") { options[:no_commit] = true }
+  opt.on("--no-push", "Do not push after version bump") { options[:no_push] = true }
   opt.on("--version", "Print current version") { options[:print_version] = true }
 end.parse!
 
