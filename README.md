@@ -2,13 +2,13 @@
 
 A gem to bump versions of cocoa pods podspec.
 
- - bumps version major / minor / patch
- - commit changes
- - added tag
- - push to specs repository
- 
+- bumps version major / minor / patch
+- commit changes
+- added tag
+- push to specs repository
+
 # Installation
- 
+
 ```
 gem install pod-bump
 ```
@@ -32,7 +32,7 @@ pod-bump patch # Bump version 0.0.0 to 0.0.1
 ### Set (version)
 
 ```
-pod-bump set 1.2.3 # Set version to 1.2.3  
+pod-bump set 1.2.3 # Set version to 1.2.3
 ```
 
 Note: Version should pass semantic validation. See https://semver.org/
@@ -68,7 +68,15 @@ pod-bump patch --m "Additional info"
 Do not commit and push to podspec after podspec version bump.
 
 ```
-pob-bump major --no-commit
+pod-bump major --no-commit
+```
+
+### `--no-push`
+
+Do not push to podspec after podspec version bump.
+
+```
+pod-bump major --no-push
 ```
 
 ### `--version`
