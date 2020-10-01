@@ -61,7 +61,7 @@ module PodBump
           return result
         end
       end
-      
+
       command = "pod repo push " + specs_repository_name + " " + podspec_name
       puts "Running " + command
       result = system(command)
@@ -74,7 +74,7 @@ module PodBump
     if result == false
       puts "Could not update podspec please do it manually after fixing errors"
     end
-    
+
     return result
   end
 
@@ -103,7 +103,7 @@ module PodBump
     for line in lines
       prefix_count_of_spaces = line.size - line.lstrip.size
       version_line_part = line.match(/\.version\s*=\s*["']#{VERSION_REGEX}["']/).to_s
-      
+
       if version_line_part.empty? == false
         items = line.split(' ')
         previous_version_string = items[2]
@@ -123,7 +123,7 @@ module PodBump
       end
       output_file.close()
     end
-    
+
     return updated
   end
 
@@ -175,7 +175,7 @@ module PodBump
       puts "Version to set should use valid semantic versioning"
       return
     end
-     
+
     podspec_file_path = find_podspec_in_current_folder
     if podspec_file_path == nil
       puts "No podspec file found in current directory"
@@ -205,15 +205,20 @@ module PodBump
       return
     end
 
-    puts "Updated version in podspec " + podspec_file_path 
-  
+    puts "Updated version in podspec " + podspec_file_path
+
     if options[:no_commit] == true
       return
     end
-    
+
     commit_git_repo = commit_git_repo(podspec_file_path, options[:commit_message], version_to_update)
     if commit_git_repo == false
       puts "Could not commit to git repo"
+      return
+    end
+
+    if options[:no_push] == true
+      puts "Successfully bumped version to " + version_to_update
       return
     end
 
